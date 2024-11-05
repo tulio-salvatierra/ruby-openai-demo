@@ -1,9 +1,13 @@
-require "openai"
 require "dotenv/load"
+require "openai"
 
-client = OpenAI::Client.new(access_token: ENV.fetch("OPENAI_API_KEY"))
+# Verify if the environment variable is loaded correctly
+puts "Loaded API Key: #{ENV['OPENAI_API_KEY']}"
 
-# Prepare an Array of previous messages
+# Initialize OpenAI client
+client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+
+# Prepare an array of previous messages
 message_list = [
   {
     "role" => "system",
@@ -23,4 +27,5 @@ api_response = client.chat(
   }
 )
 
+# Print the response
 pp api_response
